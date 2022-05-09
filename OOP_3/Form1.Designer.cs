@@ -107,7 +107,7 @@ namespace OOP_3
             this.labelName.AutoSize = true;
             this.labelName.Location = new System.Drawing.Point(596, 61);
             this.labelName.Name = "labelName";
-            this.labelName.Size = new System.Drawing.Size(45, 16);
+            this.labelName.Size = new System.Drawing.Size(45, 17);
             this.labelName.TabIndex = 7;
             this.labelName.Text = "Name";
             // 
@@ -116,7 +116,7 @@ namespace OOP_3
             this.labelColor.AutoSize = true;
             this.labelColor.Location = new System.Drawing.Point(600, 156);
             this.labelColor.Name = "labelColor";
-            this.labelColor.Size = new System.Drawing.Size(40, 16);
+            this.labelColor.Size = new System.Drawing.Size(41, 17);
             this.labelColor.TabIndex = 8;
             this.labelColor.Text = "Color";
             // 
@@ -125,7 +125,7 @@ namespace OOP_3
             this.labelAge.AutoSize = true;
             this.labelAge.Location = new System.Drawing.Point(608, 109);
             this.labelAge.Name = "labelAge";
-            this.labelAge.Size = new System.Drawing.Size(33, 16);
+            this.labelAge.Size = new System.Drawing.Size(33, 17);
             this.labelAge.TabIndex = 9;
             this.labelAge.Text = "Age";
             // 
@@ -151,9 +151,9 @@ namespace OOP_3
             // 
             // btnShowInformation
             // 
-            this.btnShowInformation.Location = new System.Drawing.Point(296, 147);
+            this.btnShowInformation.Location = new System.Drawing.Point(458, 61);
             this.btnShowInformation.Name = "btnShowInformation";
-            this.btnShowInformation.Size = new System.Drawing.Size(264, 30);
+            this.btnShowInformation.Size = new System.Drawing.Size(102, 116);
             this.btnShowInformation.TabIndex = 12;
             this.btnShowInformation.Text = "Show information";
             this.btnShowInformation.UseVisualStyleBackColor = true;
