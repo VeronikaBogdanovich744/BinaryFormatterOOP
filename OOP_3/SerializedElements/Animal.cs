@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace OOP_3.SerializedElements
 {
-    [Serializable]
+
     public abstract class Animal: ISerializable
     {
+       
         private string name;
         private string color;
         private int age;

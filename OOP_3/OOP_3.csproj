@@ -60,6 +60,7 @@
     <Compile Include="SerializedElements\Dog.cs" />
     <Compile Include="SerializedElements\Horse.cs" />
     <Compile Include="SerializedElements\Pig.cs" />
+    <Compile Include="Serializer\BinaryFormatter.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

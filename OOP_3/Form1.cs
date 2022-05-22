@@ -11,7 +11,8 @@ using OOP_3.SerializedElements;
 using System.Reflection;
 using System.IO;
 using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
+using OOP_3.Serializer;
+//using System.Runtime.Serialization.Formatters.Binary;
 
 namespace OOP_3
 {
@@ -24,10 +25,8 @@ namespace OOP_3
             InitializeComponent();
             animalTypes = typeof(Animal).Assembly.ExportedTypes.Where(t => typeof(Animal).IsAssignableFrom(t) && t != typeof(Animal));
 
-            foreach (var item in animalTypes)
-            {
-                chooseAnimal.Items.Add(item.Name);
-            }
+           
+            animalTypes.ToList().ForEach(t => chooseAnimal.Items.Add(t.Name));
         }
 
         private void Create_Click(object sender, EventArgs e)
@@ -80,15 +79,16 @@ namespace OOP_3
             }
         }
 
+        protected byte[] m_Buffer;
         private void Serialize_Click(object sender, EventArgs e)
         {
-            using (FileStream fileStream = new FileStream("data.bin", FileMode.OpenOrCreate))
+            using (FileStream fileStream = new FileStream("data.bin", FileMode.Create))
             {
-                IFormatter formatter = new BinaryFormatter();
-
-                formatter.Serialize(fileStream, animalList);
+                m_Buffer = BinaryFormatter.Serialize(animalList);
+                fileStream.Write(m_Buffer,0,m_Buffer.Length);
                 animalList.Clear();
                 AnimalList.Items.Clear();
+
             }
         }
 
@@ -96,13 +96,14 @@ namespace OOP_3
         {
             using (FileStream fileStream = new FileStream("data.bin", FileMode.OpenOrCreate))
             {
-                IFormatter formatter = new BinaryFormatter();
-
-                animalList = formatter.Deserialize(fileStream) as List<Animal>;
+                byte[] bytes = new byte[fileStream.Length];
+                fileStream.Read(bytes, 0, bytes.Length);
+                animalList = BinaryFormatter.Deserialize(bytes);
+                 
                 foreach (var item in animalList)
-                {
-                    AnimalList.Items.Add(item.Name);
-                }
+                 {
+                     AnimalList.Items.Add(item.Name);
+                 }
 
             }
         }
