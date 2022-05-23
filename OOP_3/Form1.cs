@@ -84,7 +84,7 @@ namespace OOP_3
         {
             using (FileStream fileStream = new FileStream("data.bin", FileMode.Create))
             {
-                m_Buffer = BinaryFormatter.Serialize(animalList);
+                m_Buffer = BinaryFormatter.Serialize<Animal>(animalList);
                 fileStream.Write(m_Buffer,0,m_Buffer.Length);
                 animalList.Clear();
                 AnimalList.Items.Clear();
@@ -98,7 +98,7 @@ namespace OOP_3
             {
                 byte[] bytes = new byte[fileStream.Length];
                 fileStream.Read(bytes, 0, bytes.Length);
-                animalList = BinaryFormatter.Deserialize(bytes);
+                animalList = BinaryFormatter.Deserialize<Animal>(bytes);
                  
                 foreach (var item in animalList)
                  {

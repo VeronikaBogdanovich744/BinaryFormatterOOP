@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOP_3.SerializedElements
 {
-
+    [SerializedAttribute]
     public abstract class Animal: ISerializable
     {
        

@@ -12,13 +12,18 @@ namespace OOP_3.Serializer
 {
     class BinaryFormatter
     {
+		public static byte[] Serialize<T>(List<T> objects)
+		{
 
-		public static byte[] Serialize(List<Animal> objects)
-        {
+			Type type = typeof(T);
+			if (type.GetCustomAttribute(typeof(SerializedAttribute)) == null)
+            {
+				return null;
+            }
 			string result = "";
 			foreach (var obj in objects)
-            {
-				result+=SerializeObject(obj);
+			{
+				result += SerializeObject(obj);
 				result += "/";
 			}
 			result = result.Remove(result.Length - 1, 1);
@@ -40,21 +45,29 @@ namespace OOP_3.Serializer
 			return result;
         }
 
-		public static List<Animal> Deserialize(byte[] objects)
+		public static List<type> Deserialize<type>(byte[] objects)
         {
+			Type t = typeof(type);
+			if (t.GetCustomAttribute(typeof(SerializedAttribute)) == null)
+			{
+				return null;
+			}
+
 			var binString = System.Text.Encoding.Default.GetString(objects);
 			string[] elements = binString.Split('/');
-			var animals = new List<Animal>();
-			foreach(var element in elements)
-            {
-				
+			var elementsList = new List<type>();
+
+
+			foreach (var element in elements)
+			{
+
 				string[] stringFields = element.Split(':');
 				Type elementType = Type.GetType(stringFields[0], false, true);
-				Animal animal = (Animal)Activator.CreateInstance(elementType);
+				var animal = (type)Activator.CreateInstance(elementType);
 
 				Dictionary<string, string> tokens = new Dictionary<string, string>();
-				for (int i = 1; i < stringFields.Length; i+=2)
-                {
+				for (int i = 1; i < stringFields.Length; i += 2)
+				{
 					tokens.Add(stringFields[i], stringFields[i + 1]);
 				}
 				var fields = getFields(elementType);
@@ -69,12 +82,13 @@ namespace OOP_3.Serializer
 						f.SetValue(animal, int.Parse(tokens[f.Name]));
 					}
 				}
-				animals.Add(animal);
+				elementsList.Add(animal);
 
 			}
-			return animals;
-		}
+			return elementsList;
 
+			
+        }
 		private static FieldInfo[] getFields(Type type)
         {
 			List<FieldInfo> listOfFields = new List<FieldInfo>();

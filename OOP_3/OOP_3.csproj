@@ -54,6 +54,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SerializedAttribute.cs" />
     <Compile Include="SerializedElements\Animal.cs" />
     <Compile Include="SerializedElements\Cat.cs" />
     <Compile Include="SerializedElements\Cow.cs" />
